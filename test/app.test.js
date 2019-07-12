@@ -46,5 +46,20 @@ describe('app', () => {
         );
       });
   });
+
+  it('can put to /api/v1/instrument/:id', () => {
+    return request(app)
+      .put('/api/v1/instruments/0')
+      .send({ name: 'oboe', type: 'woodwind', price: 1000 })
+      .then(res => {
+        expect(res.body).toEqual(
+          {
+            name: 'oboe',
+            type: 'woodwind',
+            price: 1000
+          }
+        );
+      });
+  });
 });
 
