@@ -61,5 +61,23 @@ describe('app', () => {
         );
       });
   });
+
+  it('can delete /api/v1/instrument/:id', () => {
+    request(app)
+      .delete('/api/v1/instruments/0')
+      .then(res => {
+        expect(res.body).toEqual(
+          [{
+            name: 'oboe',
+            type: 'woodwind',
+            price: 1000
+          }]
+        );
+        return request(app).get('/api/v1/instruments')
+          .then(res => {
+            expect(res.body).toEqual([]);
+          });
+      });
+  });
 });
 
